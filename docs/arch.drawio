@@ -1,0 +1,138 @@
+<mxfile host="Electron" modified="2024-06-04T14:19:41.729Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.13 Chrome/124.0.6367.207 Electron/30.0.6 Safari/537.36" etag="7hPpwjM1AKUjteteInEP" version="24.4.13" type="device" pages="2">
+  <diagram name="high level arch v2" id="rg2ir4COYFj6zKbLu29S">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" ResourceId="" Location="" ResourceName="" ResourceGroupName="" ResourceType="" TagsTable="" SubscriptionId="" id="VAUCMVY4GnUZ01O4022q-1">
+          <mxCell style="vsdxID=5;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[[0.5,-0.1,0],[1.1,0.5,0],[-0.1,0.5,0],[0.5,1.1,0],[0.5,1.6,0],[1.1,-0.1,0],[-0.1,-0.1,0],[1.1,1.1,0],[-0.1,1.1,0]];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;fontSize=14;" parent="1" vertex="1">
+            <mxGeometry x="280" y="210" width="60" height="110" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-2" style="vsdxID=6;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;" parent="VAUCMVY4GnUZ01O4022q-1" vertex="1">
+          <mxGeometry width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-3" style="vsdxID=7;fillColor=#000000;gradientColor=none;shape=stencil(zVnbbtswDP2aPEaQRF2fu+4/gjVtg2VN4WRr+/ej4UgOKVvxgETYWyJLFH3Ew0PRK3g4vm7etystj6fu8HP7sXs6va7g20rr3dvrttud8NcKHlfw8Hzoti/d4ffb0/D/fdPP7H/9OvzpLXwO6yII6/pVWn4NI0aKYeD7MH/T/cCH3Xm+tgLCML/7ykNqGEk2lQBPbGoppD7PWW8+d8d1dzhtTrvD2/BcDs/2m+5lu8YN18/7zQt5dPzYbt+L4TkXnSpcBCA+OhCBuOhF8A099IWDRhMHETJNQVROxJYugi18lJ74CBnVNCUK1fScdXnOhp6zMPScbRDBtkTRlCg64mIQztBQjMJASxTLgwZ20E5o6iNy3IaWMJaEkZH4aEesE2Gk/K9QxHP1kXgYdM6mbVC8mrqd8JoGI+ah/ysYK5J1Fxf3u7d/EkwqsGVYooVzrp/EQAURHcUAh7wlGBgQytJQimNeuQ0Iah4E3N5TEEJIgTO5gGc4L5SfhwB1JVIEIKtRMoiRQj3wRoC6KQCVKCi3Ny4lpMkF6J2mxLJSxDCPgRTAxG0cGW0CEzclbiu/lRgod8cRG+ffSGGEsvyDgR0CeacaXRq81AK2Unork71LKDihTJ3eUNKbnqzSnN5Yr9rbRncFBdzeF9sHP78AQEhFUbDVJAe5uB0ZrmmFjjUH6BmbLRiucrX7lUegAlq5wKsU8HMMZ7WhLKpXmYNltJnn3D/Ny1yIpjSPBw11ijP9Vhf19nXKtAju64xlV+RcaaZQ1cLWQAj5nnbJcFr0I1KKMkajQjQT8HJ7E9LRzRGWZS3IUnP2X/KkgQoX7ljdsli1XI6cEdHML8D8EmgcuChC5Vxlri8u+MpTlp0z2eJQXS4Bx8uuqjRzZhSZldsT4X/j62nlna6Tj5IV71hAF2BguzC/gTXpcd4BE0SlkkMp1Iy5MTUilldy9Np1oe6FzQYgY1aPFAPDta4MHKZdfeBQNgTFcwwKeLsUV26P1bGp6DEUHS/g51SLrgY5bkFwUzYELxh7XGrETmPmBdV7yPecaS74nEBGFZOVwJms+1jNU9wtR5sNMIaYKpyMQUhNzYULdEiRNJMPOAZypEW2yep/tJn7Xfe/BcXcQR97z9WexZK6rwxGmwS6RTq4SgVKHVQBYGIKqfSe3EBb9kUBuWkqTQ6Z7V/IAkWsb4cZbvPG3bgKZOX2yMQrF/yyc8WiwLpcFOY2bcN6ArfXxfa+drV1WeoSCDoJ+pyMFCmOXeugaJ30jdhmMrIgtBkXIr/eG0hnNo2yLJKoTxlt4eX5yg7lAlvRqd4fdpnXKQ4WJvWa+QX44I/xE+zzbr8fvuBePuefbHFo+NwLj38B);strokeColor=none;strokeWidth=17;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;" parent="VAUCMVY4GnUZ01O4022q-2" vertex="1">
+          <mxGeometry width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-4" value="&lt;div style=&quot;&quot;&gt;&lt;font style=&quot;font-family: Calibri; color: rgb(0, 0, 0); direction: ltr; letter-spacing: 0px; line-height: 120%; opacity: 1;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;Azure OpenAI&lt;/font&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;vsdxID=5;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[[0.5,-0.1,0],[1.1,0.5,0],[-0.1,0.5,0],[0.5,1.1,0],[0.5,1.6,0],[1.1,-0.1,0],[-0.1,-0.1,0],[1.1,1.1,0],[-0.1,1.1,0]];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;verticalAlign=middle;align=center;overflow=width;;html=1;" parent="VAUCMVY4GnUZ01O4022q-1" vertex="1">
+          <mxGeometry x="5.28" y="69.91" width="49.43" height="40.09" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-5" value="Storage Account" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/storage/Storage_Accounts.svg;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="141.5" y="498" width="65" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;curved=1;" parent="1" source="VAUCMVY4GnUZ01O4022q-6" target="VAUCMVY4GnUZ01O4022q-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-6" value="AI Search" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/Search_Services.svg;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;" parent="1" vertex="1">
+          <mxGeometry x="140" y="373" width="68" height="49.120000000000005" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;" parent="1" source="VAUCMVY4GnUZ01O4022q-16" target="VAUCMVY4GnUZ01O4022q-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="D6SvXnocaFQD9_7jMILd-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;" edge="1" parent="1" source="VAUCMVY4GnUZ01O4022q-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="484" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-7" value="Function App&lt;div&gt;&lt;br&gt;&lt;div&gt;(1) AI Orchestration&lt;/div&gt;&lt;div&gt;Semantic Kernel&lt;/div&gt;&lt;div&gt;(2) Doc Chunking/Indexing&lt;/div&gt;&lt;div&gt;via Kernel Memory&lt;/div&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;" parent="1" vertex="1">
+          <mxGeometry x="450" y="421.12" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-8" value="Static Web App&lt;div&gt;Simple test UI&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/preview/Static_Apps.svg;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="630" y="424.12" width="68" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-9" value="API Management" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/API_Management_Services.svg;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;" parent="1" vertex="1">
+          <mxGeometry x="451.5" y="250.00000000000003" width="65" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.067;entryY=0.517;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;startArrow=classic;startFill=1;" parent="1" source="VAUCMVY4GnUZ01O4022q-9" target="VAUCMVY4GnUZ01O4022q-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;exitX=0.941;exitY=0.515;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="VAUCMVY4GnUZ01O4022q-7" target="VAUCMVY4GnUZ01O4022q-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;" parent="1" source="VAUCMVY4GnUZ01O4022q-7" target="VAUCMVY4GnUZ01O4022q-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="450" y="451" as="sourcePoint" />
+            <mxPoint x="248" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VAUCMVY4GnUZ01O4022q-16" value="Container App&lt;div&gt;Kernel Memory Service&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/other/Container_App_Environments.svg;" parent="1" vertex="1">
+          <mxGeometry x="310" y="417.12" width="68" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="h8ATbuFXCVucGqsurS8H-1" value="Orchestration" style="swimlane;startSize=17;" vertex="1" parent="1">
+          <mxGeometry x="260" y="373" width="300" height="207" as="geometry" />
+        </mxCell>
+        <mxCell id="D6SvXnocaFQD9_7jMILd-1" value="&lt;b&gt;AI Orchestration Function Logical Flow:&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;1. Call into API endpoint with a question with session ID&lt;/span&gt;&lt;div&gt;2. Semantic Kernel (orchestration layer):&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;a. stores question in kernel memory with session ID&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;b. retrieves all previous messages from kernel memory by session ID&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;c. passes message history + registered functions and instructions to Azure OpenAI&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;d. OpenAI makes a plan on what it needs to answer the question, passes back to the Kernel to execute plan&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;e. Kernel executes plan: retrieve data from AI Search, etc.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;f. Kernel sends data + message history back to OpenAI&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;g. OpenAI answers the question, sends back to Kernel&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;h. Kernel sends answer as response&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;D&lt;b&gt;oc Chunking/Indexing Function Logical Flow:&lt;/b&gt;&lt;/div&gt;&lt;div&gt;1. Triggered on new doc loaded in Storage account&lt;/div&gt;&lt;div&gt;2. Using Kernel Memory Service and AI Search, execute chunking of new document and re-index&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="610" width="650" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="D6SvXnocaFQD9_7jMILd-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;exitX=0.574;exitY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;startArrow=classic;startFill=1;" edge="1" parent="1" source="VAUCMVY4GnUZ01O4022q-16" target="VAUCMVY4GnUZ01O4022q-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="349" y="330" />
+              <mxPoint x="484" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QOA26esmpoQJXIoG_FrI-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.029;entryY=1.031;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" edge="1" parent="1" target="VAUCMVY4GnUZ01O4022q-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="530" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="high level arch v1" id="Wj2ClGf43JAwRerWnspf">
+    <mxGraphModel dx="1434" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-0" />
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-1" parent="GtxzXg59BSeRQgs9ORv8-0" />
+        <UserObject label="" ResourceId="" Location="" ResourceName="" ResourceGroupName="" ResourceType="" TagsTable="" SubscriptionId="" id="GtxzXg59BSeRQgs9ORv8-2">
+          <mxCell style="vsdxID=5;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[[0.5,-0.1,0],[1.1,0.5,0],[-0.1,0.5,0],[0.5,1.1,0],[0.5,1.6,0],[1.1,-0.1,0],[-0.1,-0.1,0],[1.1,1.1,0],[-0.1,1.1,0]];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;fontSize=14;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+            <mxGeometry x="290" y="73" width="60" height="110" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-3" value="Azure OpenAI" style="vsdxID=6;fillColor=none;gradientColor=none;strokeColor=none;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;labelPosition=center;verticalLabelPosition=top;align=center;verticalAlign=bottom;" parent="GtxzXg59BSeRQgs9ORv8-2" vertex="1">
+          <mxGeometry width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-4" style="vsdxID=7;fillColor=#000000;gradientColor=none;shape=stencil(zVnbbtswDP2aPEaQRF2fu+4/gjVtg2VN4WRr+/ej4UgOKVvxgETYWyJLFH3Ew0PRK3g4vm7etystj6fu8HP7sXs6va7g20rr3dvrttud8NcKHlfw8Hzoti/d4ffb0/D/fdPP7H/9OvzpLXwO6yII6/pVWn4NI0aKYeD7MH/T/cCH3Xm+tgLCML/7ykNqGEk2lQBPbGoppD7PWW8+d8d1dzhtTrvD2/BcDs/2m+5lu8YN18/7zQt5dPzYbt+L4TkXnSpcBCA+OhCBuOhF8A099IWDRhMHETJNQVROxJYugi18lJ74CBnVNCUK1fScdXnOhp6zMPScbRDBtkTRlCg64mIQztBQjMJASxTLgwZ20E5o6iNy3IaWMJaEkZH4aEesE2Gk/K9QxHP1kXgYdM6mbVC8mrqd8JoGI+ah/ysYK5J1Fxf3u7d/EkwqsGVYooVzrp/EQAURHcUAh7wlGBgQytJQimNeuQ0Iah4E3N5TEEJIgTO5gGc4L5SfhwB1JVIEIKtRMoiRQj3wRoC6KQCVKCi3Ny4lpMkF6J2mxLJSxDCPgRTAxG0cGW0CEzclbiu/lRgod8cRG+ffSGGEsvyDgR0CeacaXRq81AK2Unork71LKDihTJ3eUNKbnqzSnN5Yr9rbRncFBdzeF9sHP78AQEhFUbDVJAe5uB0ZrmmFjjUH6BmbLRiucrX7lUegAlq5wKsU8HMMZ7WhLKpXmYNltJnn3D/Ny1yIpjSPBw11ijP9Vhf19nXKtAju64xlV+RcaaZQ1cLWQAj5nnbJcFr0I1KKMkajQjQT8HJ7E9LRzRGWZS3IUnP2X/KkgQoX7ljdsli1XI6cEdHML8D8EmgcuChC5Vxlri8u+MpTlp0z2eJQXS4Bx8uuqjRzZhSZldsT4X/j62nlna6Tj5IV71hAF2BguzC/gTXpcd4BE0SlkkMp1Iy5MTUilldy9Np1oe6FzQYgY1aPFAPDta4MHKZdfeBQNgTFcwwKeLsUV26P1bGp6DEUHS/g51SLrgY5bkFwUzYELxh7XGrETmPmBdV7yPecaS74nEBGFZOVwJms+1jNU9wtR5sNMIaYKpyMQUhNzYULdEiRNJMPOAZypEW2yep/tJn7Xfe/BcXcQR97z9WexZK6rwxGmwS6RTq4SgVKHVQBYGIKqfSe3EBb9kUBuWkqTQ6Z7V/IAkWsb4cZbvPG3bgKZOX2yMQrF/yyc8WiwLpcFOY2bcN6ArfXxfa+drV1WeoSCDoJ+pyMFCmOXeugaJ30jdhmMrIgtBkXIr/eG0hnNo2yLJKoTxlt4eX5yg7lAlvRqd4fdpnXKQ4WJvWa+QX44I/xE+zzbr8fvuBePuefbHFo+NwLj38B);strokeColor=none;strokeWidth=17;spacingTop=-3;spacingBottom=-3;spacingLeft=-3;spacingRight=-3;points=[];labelBackgroundColor=none;rounded=0;html=1;whiteSpace=wrap;" parent="GtxzXg59BSeRQgs9ORv8-3" vertex="1">
+          <mxGeometry width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-6" value="Storage Account" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/storage/Storage_Accounts.svg;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="130" y="203" width="65" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;curved=1;" parent="GtxzXg59BSeRQgs9ORv8-1" source="GtxzXg59BSeRQgs9ORv8-8" target="GtxzXg59BSeRQgs9ORv8-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-8" value="AI Search" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/Search_Services.svg;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="232" y="293" width="68" height="49.120000000000005" as="geometry" />
+        </mxCell>
+        <mxCell id="8ALGVOUrDUNxHtm6HYY7-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;" parent="GtxzXg59BSeRQgs9ORv8-1" source="GtxzXg59BSeRQgs9ORv8-10" target="GtxzXg59BSeRQgs9ORv8-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-10" value="Function App&lt;div&gt;AI Orchestration&lt;/div&gt;&lt;div&gt;Semantic Kernel&lt;/div&gt;&lt;div&gt;Kernel Memory&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Function_Apps.svg;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="450" y="314.12" width="68" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-11" value="Static Web App&lt;div&gt;Simple test UI&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/preview/Static_Apps.svg;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="640" y="212" width="68" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-12" value="API Management" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/API_Management_Services.svg;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="393" y="153" width="65" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.508;entryY=1.067;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;startArrow=classic;startFill=1;" parent="GtxzXg59BSeRQgs9ORv8-1" source="GtxzXg59BSeRQgs9ORv8-10" target="GtxzXg59BSeRQgs9ORv8-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;" parent="GtxzXg59BSeRQgs9ORv8-1" source="GtxzXg59BSeRQgs9ORv8-12" target="GtxzXg59BSeRQgs9ORv8-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="329.9949999999999" y="78.90100000000007" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtxzXg59BSeRQgs9ORv8-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;startArrow=classic;startFill=1;fontSize=14;" parent="GtxzXg59BSeRQgs9ORv8-1" source="GtxzXg59BSeRQgs9ORv8-10" target="GtxzXg59BSeRQgs9ORv8-11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Udxy6jdEb0CrBEyqxIHC-0" value="Logical Flow:&lt;div&gt;1. Call into API endpoint with a question with session ID&lt;/div&gt;&lt;div&gt;2. Semantic Kernel (orchestration layer):&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;a. stores question in kernel memory with session ID&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;b. retrieves all previous messages from kernel memory by session ID&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;c. passes message history + registered functions and instructions to Azure OpenAI&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;d. OpenAI makes a plan on what it needs to answer the question, passes back to the Kernel to execute plan&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;e. Kernel executes plan: retrieve data from AI Search, etc.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;f. Kernel sends data + message history back to OpenAI&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;g. OpenAI answers the question, sends back to Kernel&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;h. Kernel sends answer as response&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="GtxzXg59BSeRQgs9ORv8-1" vertex="1">
+          <mxGeometry x="130" y="490" width="650" height="300" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

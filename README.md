@@ -1,14 +1,16 @@
-# Project
+# Generative Answers with RAG Endpoint
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+The purpose of this project is to provide templated example WebAPI endpoint that uses Azure OpenAI to answer user questions and provide instructions based on a set of internal documents with Retrievel Augmented Generation (RAG).
 
-As the maintainer of this project, please make a few updates:
+This template utilizes the following open source AI orchestration layers:
+* Semantic Kernel SDK
+    * [GitHub repo](https://github.com/microsoft/semantic-kernel)
+    * [Microsoft Learn documentation](https://learn.microsoft.com/en-us/semantic-kernel/overview)
+* [Kernel Memory Service](https://github.com/microsoft/kernel-memory)
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+## Architecture
+
+![High Level Architecture](./docs/arch-high%20level%20arch%20v2.png)
 
 ## Contributing
 
