@@ -5,6 +5,13 @@ csx
 edge
 Publish
 
+#Our files
+.env
+
+
+# User-specific files
+*.rsuser
+*.suo
 *.user
 *.suo
 *.cscfg
