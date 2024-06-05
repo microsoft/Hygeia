@@ -4,4 +4,5 @@
 
 azure-functions
 openai
-semantic-kernel
+semantic-kernel==1.0.4
+azure.identity

@@ -1,7 +1,12 @@
 import azure.functions as func
+from azure.identity import DefaultAzureCredential
 import logging
 import os
 import openai
+from semantic_kernel.connectors.ai.open_ai.services.azure_chat_completion import AzureChatCompletion
+from semantic_kernel.connectors.ai.open_ai.services.azure_text_embedding import AzureTextEmbedding
+from semantic_kernel.core_plugins.text_memory_plugin import TextMemoryPlugin
+from semantic_kernel.kernel import Kernel
 
 app = func.FunctionApp()
 
@@ -20,45 +25,29 @@ def main(req):
             if not prompt:
                 raise RuntimeError("prompt data must be set in POST.")
 
-    # init OpenAI: Replace these with your own values, either in environment variables or directly here
-    USE_LANGCHAIN = os.getenv("USE_LANGCHAIN", 'True').lower() in ('true', '1', 't')
-    AZURE_OPENAI_KEY = os.environ.get("AZURE_OPENAI_KEY")
-    AZURE_OPENAI_ENDPOINT = os.environ.get("AZURE_OPENAI_ENDPOINT")
-    AZURE_OPENAI_SERVICE = os.environ.get("AZURE_OPENAI_SERVICE") or "myopenai"
-    AZURE_OPENAI_GPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_GPT_DEPLOYMENT") or "davinci"
-    AZURE_OPENAI_CHATGPT_DEPLOYMENT = os.environ.get("AZURE_OPENAI_CHATGPT_DEPLOYMENT") or "chat" #GPT turbo
-    if 'AZURE_OPENAI_KEY' not in os.environ:
-        raise RuntimeError("No 'AZURE_OPENAI_KEY' env var set.  Please see Readme.")
+    # Get managed identity token and env vars
+    creds = DefaultAzureCredential()
+    deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+    embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    aiSerchEndpoint =os.getenv("AZURE_AI_SEARCH_ENDPOINT")
+    
+    kernel = Kernel()
 
-    # configure azure openai for langchain and/or llm
-    openai.api_key = AZURE_OPENAI_KEY
-    openai.api_base = AZURE_OPENAI_ENDPOINT # your endpoint should look like the following https://YOUR_RESOURCE_NAME.openai.azure.com/
-    openai.api_type = 'azure'
-    openai.api_version = '2023-05-15' # this may change in the future
-                                      # for langchain, set this version in environment variables using OPENAI_API_VERSION
+    service_id = "manuallookup"
 
-    if bool(USE_LANGCHAIN):
-        logging.info('Using Langchain')
+    azure_chat_service = AzureChatCompletion(
+                            service_id=service_id,
+                            deployment_name=deployment,
+                            endpoint=endpoint,
+                            credentials=creds,
+                        )
 
-        llm = AzureOpenAI(deployment_name=AZURE_OPENAI_CHATGPT_DEPLOYMENT, temperature=0.3, openai_api_key=AZURE_OPENAI_KEY)
-        llm_prompt = PromptTemplate(
-            input_variables=["human_prompt"],
-            template="The following is a conversation with an AI assistant. The assistant is helpful.\n\nAI: I am an AI created by OpenAI. How can I help you today?\nHuman: {human_prompt}?",
-        )
-        from langchain.chains import LLMChain
-        chain = LLMChain(llm=llm, prompt=llm_prompt)
-        return chain.run(prompt)
+    embedding_gen = AzureTextEmbedding(service_id="embedding", deployment_name=embedding_deployment)
+    kernel.add_service(azure_chat_service)
+    kernel.add_service(embedding_gen)
 
-    else:
-        logging.info('Using ChatGPT LLM directly')
-
-        completion = openai.Completion.create(
-            engine=AZURE_OPENAI_CHATGPT_DEPLOYMENT,
-            prompt=generate_prompt(prompt),
-            temperature=0.3,
-            max_tokens=200
-        )
-        return completion.choices[0].text
+    
 
 
 def generate_prompt(prompt):
