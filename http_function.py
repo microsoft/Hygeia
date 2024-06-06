@@ -1,36 +1,19 @@
 import logging 
 
+import os
+import openai
+from semantic_kernel.connectors.ai.open_ai.services.azure_chat_completion import AzureChatCompletion
+from semantic_kernel.kernel import Kernel
+import azure.identity
+
 import azure.functions as func 
+
+from plugins.kernel_memory_plugin import KernelMemoryPlugin
 
 bp = func.Blueprint() 
 
-@bp.route(route="ask")
-def http_ask(req: func.HttpRequest) -> func.HttpResponse: 
-    logging.info('Python HTTP trigger function processed a request.') 
-
-    name = req.params.get('name') 
-    if not name: 
-        try: 
-            req_body = req.get_json() 
-        except ValueError: 
-            pass 
-        else: 
-            name = req_body.get('name') 
-
-    if name: 
-        return func.HttpResponse( 
-            f"Hello, {name}. This HTTP-triggered function " 
-            f"executed successfully.") 
-    else: 
-        return func.HttpResponse( 
-            "This HTTP-triggered function executed successfully. " 
-            "Pass a name in the query string or in the request body for a" 
-            " personalized response.", 
-            status_code=200 
-        )
-        
-@app.route(route='ask', auth_level='anonymous', methods=['POST'])
-def main(req):
+@bp.route(route='ask', auth_level='anonymous', methods=['POST'])
+def http_ask(req: func.HttpRequest) -> func.HttpResponse:
 
     prompt = req.params.get('prompt') 
     if not prompt: 
@@ -51,27 +34,7 @@ def main(req):
     
     kernel = Kernel()
 
-    service_id = "manuallookup"
-
-    azure_chat_service = AzureChatCompletion(
-                            service_id=service_id,
-                            deployment_name=deployment,
-                            endpoint=endpoint,
-                            credentials=creds,
-                        )
-
-    embedding_gen = AzureTextEmbedding(service_id="embedding", deployment_name=embedding_deployment)
-    kernel.add_service(azure_chat_service)
-    kernel.add_service(embedding_gen)
-
-def generate_prompt(prompt):
-    capitalized_prompt = prompt.capitalize()
-
-    # Chat
-    return f'The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nAI: I am an AI created by OpenAI. How can I help you today?\nHuman: {capitalized_prompt}' 
-
-    # Classification
-    #return 'The following is a list of companies and the categories they fall into:\n\nApple, Facebook, Fedex\n\nApple\nCategory: ' 
-
-    # Natural language to Python
-    #return '\"\"\"\n1. Create a list of first names\n2. Create a list of last names\n3. Combine them randomly into a list of 100 full names\n\"\"\"'
+    kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
+    
+    resp = kernel.invoke(kmPlugin["ask"], question="Where is the event?")
+    
