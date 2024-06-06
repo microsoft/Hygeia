@@ -1,5 +1,4 @@
-
-
+# Executes a request to the default http trigger of Azure function (includes orchestration logic)
 POST http://localhost:7071/api/ask HTTP/1.1
 content-type: application/json
 
@@ -8,7 +7,7 @@ content-type: application/json
 }
 
 ###
-
+# Execute a sample 'ask' to the Kernel Memory service
 POST https://km-service-e8a8fe.happypebble-4041b049.eastus.azurecontainerapps.io/ask HTTP/1.1
 content-type: application/json
 
@@ -18,7 +17,7 @@ content-type: application/json
 }
 
 ###
-
+# Executes a sample 'search' to the Kernel Memory service
 POST https://km-service-e8a8fe.happypebble-4041b049.eastus.azurecontainerapps.io/search HTTP/1.1
 content-type: application/json
 
