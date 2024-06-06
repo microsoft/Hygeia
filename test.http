@@ -6,3 +6,24 @@ content-type: application/json
 {
     "prompt": "What is a good feature of Azure Functions?"
 }
+
+###
+
+POST https://km-service-e8a8fe.happypebble-4041b049.eastus.azurecontainerapps.io/ask HTTP/1.1
+content-type: application/json
+
+{
+    "index": "default",
+    "question": "Where is the event happening?"
+}
+
+###
+
+POST https://km-service-e8a8fe.happypebble-4041b049.eastus.azurecontainerapps.io/search HTTP/1.1
+content-type: application/json
+
+{
+  "index": "default",
+  "query": "Where is the event happening?",
+  "top": 1
+}
