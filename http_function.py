@@ -1,6 +1,7 @@
 import logging 
 
 import os
+import json
 import openai
 from semantic_kernel.connectors.ai.open_ai.services.azure_chat_completion import AzureChatCompletion
 from semantic_kernel.kernel import Kernel
@@ -10,10 +11,10 @@ import azure.functions as func
 
 from plugins.kernel_memory_plugin import KernelMemoryPlugin
 
-bp = func.Blueprint() 
+http_func = func.Blueprint() 
 
-@bp.route(route='ask', auth_level='anonymous', methods=['POST'])
-def http_ask(req: func.HttpRequest) -> func.HttpResponse:
+@http_func.route(route='ask', auth_level='anonymous', methods=['POST'])
+async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
 
     prompt = req.params.get('prompt') 
     if not prompt: 
@@ -27,7 +28,7 @@ def http_ask(req: func.HttpRequest) -> func.HttpResponse:
                 raise RuntimeError("prompt data must be set in POST.")
 
     # Get managed identity token and env vars
-    creds = DefaultAzureCredential()
+    #creds = DefaultAzureCredential()
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
     embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
@@ -36,5 +37,10 @@ def http_ask(req: func.HttpRequest) -> func.HttpResponse:
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
     
-    resp = kernel.invoke(kmPlugin["ask"], question="Where is the event?")
+    resp = await kernel.invoke(kmPlugin["ask"], question="Where is the event?")
     
+    if resp:
+        # return resp as json
+        return func.HttpResponse(str(resp), mimetype="application/json")
+    else:
+        return func.HttpResponse("Response: No response")

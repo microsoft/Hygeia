@@ -2,9 +2,9 @@ import logging
 
 import azure.functions as func 
 
-bp = func.Blueprint() 
+blob_func = func.Blueprint() 
 
-@bp.blob_trigger("myblob/{name}", connection="AzureWebJobsStorage")
+@blob_func.blob_trigger("myblob/{name}", connection="AzureWebJobsStorage")
 def blob_upload(name: str):
     logging.info('Python HTTP trigger function processed a request.') 
 
