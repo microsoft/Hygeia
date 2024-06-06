@@ -1,9 +1,13 @@
-import asyncio
 from typing import Annotated
+import http
+import os
 
 from semantic_kernel.functions import kernel_function
+import requests
 
 class KernelMemoryPlugin:
+    base_url = os.getenv("KERNEL_MEMORY_SERVICE_ENDPOINT")
+    index = os.getenv("KERNEL_MEMORY_SERVICE_INDEX")
     
     @kernel_function(
         name="ask",
@@ -14,9 +18,9 @@ class KernelMemoryPlugin:
         question: Annotated[str, "the question to ask"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the response from Kernel Memory service ask"""
-        # do the stuff here
-        # return the response
-        return "ask response"
+        # call the http endpoint to ask the question
+        response = requests.post(f"{self.base_url}ask", json={"question": question, "index": self.index})
+        return response.text        
 
     @kernel_function(
         name="search",
@@ -27,7 +31,8 @@ class KernelMemoryPlugin:
         query: Annotated[str, "the search query"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the search query response."""
-        return "search response"
+        response = requests.post(f"{self.base_url}search", json={"query": query, "index": self.index})
+        return response.text
     
     @kernel_function(
         name="upload",

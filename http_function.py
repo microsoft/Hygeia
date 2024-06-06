@@ -37,7 +37,8 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
     
-    resp = await kernel.invoke(kmPlugin["ask"], question="Where is the event?")
+    # resp = await kernel.invoke(kmPlugin["ask"], question="Where is the event?")
+    resp = await kernel.invoke(kmPlugin["search"], query=prompt)
     
     if resp:
         # return resp as json
