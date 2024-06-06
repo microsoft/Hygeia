@@ -13,7 +13,9 @@ content-type: application/json
 
 {
     "index": "default",
-    "question": "Where is the event happening?"
+    "question": "Is OpenAI one of my talking points?",
+    "minRelevance": 0.8
+
 }
 
 ###
@@ -23,6 +25,12 @@ content-type: application/json
 
 {
   "index": "default",
-  "query": "Where is the event happening?",
+  "query": "OpenAI",
   "top": 1
 }
+
+###
+# Uploads a file directly to the Kernel Memory service
+POST https://km-service-e8a8fe.happypebble-4041b049.eastus.azurecontainerapps.io/upload HTTP/1.1
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
