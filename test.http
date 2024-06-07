@@ -13,8 +13,8 @@ content-type: application/json
 
 {
     "index": "default",
-    "question": "Is OpenAI one of my talking points?",
-    "minRelevance": 0.8
+    "question": "Are there one or more talking points about OpenAI?",
+    "minRelevance": 0.75
 
 }
 
