@@ -32,10 +32,12 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
     embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
     endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    plugins_directory = os.path.join(os.path.dirname(__file__), "plugins")
     
     kernel = Kernel()
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
+    chatPlugin = kernel.add_plugin(parent_directory=plugins_directory, plugin_name="chat")
     
     resp = await kernel.invoke(kmPlugin["ask"], question=prompt)
     # resp = await kernel.invoke(kmPlugin["search"], query=prompt)
@@ -45,3 +47,7 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(str(resp), mimetype="application/json")
     else:
         return func.HttpResponse("Response: No response")
+
+    
+
+    
