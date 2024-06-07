@@ -4,6 +4,7 @@
 
 azure-functions
 azure-storage-blob
+azurefunctions-extensions-bindings-blob
 openai
 semantic-kernel==1.0.5
 azure.identity

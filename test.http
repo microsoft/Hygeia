@@ -3,7 +3,7 @@ POST http://localhost:7071/api/ask HTTP/1.1
 content-type: application/json
 
 {
-    "prompt": "Where is the event happening?"
+    "prompt": "When should i use the media release form?"
 }
 
 ###
