@@ -1,0 +1,51 @@
+# Executes a request to the default http trigger of Azure function (includes orchestration logic)
+POST http://localhost:7071/api/ask HTTP/1.1
+content-type: application/json
+
+{
+    "prompt": "Where is the event happening?"
+}
+
+###
+# Execute a sample 'ask' to the Kernel Memory service
+POST http://localhost:9001/ask HTTP/1.1
+content-type: application/json
+
+{
+    "index": "default",
+    "question": "Are there one or more talking points about OpenAI?",
+    "minRelevance": 0.75
+
+}
+
+###
+# Executes a sample 'search' to the Kernel Memory service
+POST http://localhost:9001/search HTTP/1.1
+content-type: application/json
+
+{
+  "index": "default",
+  "query": "Orion Spacecraft",
+  "limit": 1,
+  "minRelevance": 0.5
+}
+
+###
+# Uploads a file directly to the Kernel Memory service
+POST http://localhost:9001/upload HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="index"
+
+default
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="documentId"
+
+SKTEST
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file1"; filename="/C:/Users/phjirsa/Dev/kernel-memory/examples/006-curl-calling-webservice/test.pdf"
+Content-Type: application/pdf
+
+(data)
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
