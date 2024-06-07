@@ -1,0 +1,27 @@
+{
+    "schema": 1,
+    "description": "Generate an answer the user's question based on the retrieved relevant information.",
+    "execution_settings": {
+        "default": {
+            "max_tokens": 1000,
+            "temperature": 0.1,
+            "top_p": 0,
+            "presence_penalty": 0,
+            "frequency_penalty": 0
+        }
+    },
+    "input": {
+        "parameters": [
+            {
+                "name": "chat_history",
+                "description": "history of the conversation between the user and the AI",
+                "defaultValue": ""
+            },            
+            {
+                "name": "input_text",
+                "description": "Chunks of text found with relevance to the user's question, including file references",
+                "defaultValue": ""
+            }
+        ]
+    }
+}
