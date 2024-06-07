@@ -1,9 +1,10 @@
+import io
 from typing import Annotated
 import http
 import os
+import requests
 
 from semantic_kernel.functions import kernel_function
-import requests
 
 class KernelMemoryPlugin:
     base_url = os.getenv("KERNEL_MEMORY_SERVICE_ENDPOINT")
@@ -40,7 +41,9 @@ class KernelMemoryPlugin:
     )
     def upload(
         self,
-        file: Annotated[str, "the file to upload"],
+        file: Annotated[io.BytesIO, "the file to upload"],
+        document_id: Annotated[str, "the document id"],
     ) -> Annotated[str, "the output is a string"]:
-        """Returns the file upload response."""        
-        return "upload response"
+        """Returns the file upload response."""
+        response = requests.post(f"{self.base_url}upload", files={"file1": file}, data={"index": self.index, "documentId": document_id})
+        return response.text
