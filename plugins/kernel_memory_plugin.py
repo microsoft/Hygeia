@@ -43,4 +43,5 @@ class KernelMemoryPlugin:
         file: Annotated[str, "the file to upload"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the file upload response."""        
+        response = requests.post(f"{self.base_url}upload", json={"documentId": file, "index": self.index})
         return "upload response"
