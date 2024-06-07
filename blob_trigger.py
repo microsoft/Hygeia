@@ -1,12 +1,37 @@
+import os
 import logging 
-
 import azure.functions as func 
+from plugins.kernel_memory_plugin import KernelMemoryPlugin
+from semantic_kernel.kernel import Kernel
+# from azure.identity import DefaultAzureCredential
 
 blob_func = func.Blueprint() 
 
-@blob_func.blob_trigger("myblob/{name}", connection="AzureWebJobsStorage")
-def blob_upload(name: str):
-    logging.info('Python HTTP trigger function processed a request.') 
+# credentials = DefaultAzureCredential()
+
+# @blob_func.function_nam(name="BlobTrigger")
+@blob_func.blob_trigger(arg_name="blobFile", path="smemory/{id}", connection="STORAGE_CONNECTION_STRING")
+async def blob_upload(blobFile: func.InputStream):
+    logging.info(f"Python HTTP trigger function processed a request for {blobFile.name}.")
+    
+    kernel = Kernel()
+
+    kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
+
+    response = await kernel.invoke(kmPlugin["upload"], file=blobFile.name)
+
+    if response:    
+        logging.info(f"Response: {response}")
+    else:
+        logging.info("Response: No response")
+
+.
+
+
+
+
+
+
 
     # 1. Get the blob
     # 2. create instance of our custom kernelmemoryplugin <- PHIL TODO GET IT DONE
@@ -15,25 +40,3 @@ def blob_upload(name: str):
     #kernel = Kernel()
     #kernelmemfunc = kernel.import_plugin(KernelMemroyPlugin)
     #kernel.invoke(kernelmemfunc, "store_blob", name)
-    
-    # remove all this pasted code below
-    name = req.params.get('name') 
-    if not name: 
-        try: 
-            req_body = req.get_json() 
-        except ValueError: 
-            pass 
-        else: 
-            name = req_body.get('name') 
-
-    if name: 
-        return func.HttpResponse( 
-            f"Hello, {name}. This HTTP-triggered function " 
-            f"executed successfully.") 
-    else: 
-        return func.HttpResponse( 
-            "This HTTP-triggered function executed successfully. " 
-            "Pass a name in the query string or in the request body for a" 
-            " personalized response.", 
-            status_code=200 
-        )
