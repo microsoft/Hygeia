@@ -1,8 +1,9 @@
 import io
 from typing import Annotated
-import http
+import logging
 import os
 import requests
+import azure.functions as func
 
 from semantic_kernel.functions import kernel_function
 
@@ -41,9 +42,12 @@ class KernelMemoryPlugin:
     )
     def upload(
         self,
-        file: Annotated[io.BytesIO, "the file to upload"],
+        file: Annotated[bytes, "the file to upload"],
         document_id: Annotated[str, "the document id"],
+        file_name: Annotated[str, "the file name"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the file upload response."""
-        response = requests.post(f"{self.base_url}upload", files={"file1": file}, data={"index": self.index, "documentId": document_id})
+        logging.info(f"Index name: {self.index}")
+
+        response = requests.post(f"{self.base_url}upload", files={ file_name: file }, data={"index": self.index, "documentId": document_id})
         return response.text
