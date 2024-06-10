@@ -18,7 +18,8 @@ from plugins.kernel_memory_plugin import KernelMemoryPlugin
 http_func = func.Blueprint() 
 
 @http_func.route(route='ask', auth_level='anonymous', methods=['POST'])
-async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
+#async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
+async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("Python HTTP trigger function processed a request.")
     prompt = req.params.get('prompt') 
     if not prompt: 
@@ -32,9 +33,9 @@ async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
                 raise RuntimeError("prompt data must be set in POST.")
 
     # Get managed identity token and env vars    
-    deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-    embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
-    endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    # deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+    # embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+    # endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
     plugins_directory = os.path.join(os.path.dirname(__file__), "plugins")
     
     kernel = Kernel()
@@ -42,37 +43,37 @@ async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
     service_id = "chat-gpt"
     chat_service = AzureChatCompletion(
         service_id=service_id,
-        deployment=deployment,
-        endpoint=endpoint,
-        ad_auth_provider=get_azure_openai_token,
-        
     )
     kernel.add_service(chat_service)
-    embedding_gen = AzureTextEmbedding(
-        service_id="ada",
-        deployment=embedding_deployment,
-        endpoint=endpoint,
-        ad_auth_provider=get_azure_openai_token,
-    )
+    # embedding_gen = AzureTextEmbedding(
+    #     service_id="ada",
+    #     deployment=embedding_deployment,
+    #     endpoint=endpoint,
+    #     ad_auth_provider=get_azure_openai_token,
+    # )
     
-    memory = SemanticTextMemory(storage=VolatileMemoryStore(), embeddings_generator=embedding_gen)
+    # memory = SemanticTextMemory(storage=VolatileMemoryStore(), embeddings_generator=embedding_gen)
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
-    chatPlugin = kernel.add_plugin(parent_directory=plugins_directory, plugin_name="chat")
+    chatPlugin = kernel.add_plugin(parent_directory=plugins_directory, plugin_name="prompts")    
     
     history = ChatHistory()
     # fetch short term memories for sessionId (chat history)
-    if session_id:
-        result = memory.get(collection="chat", key=session_id)
-        if result:
-            history = json.loads(result.text)
-    
-    history
+    # if session_id:
+    #     result = memory.get(collection="chat", key=session_id)
+    #     if result:
+    #         history = json.loads(result.text)    
     
     # fetch memories related to user prompt (RAG docs)
-    search_results = await kernel.invoke(kmPlugin["search"], question=prompt)
+    search_results = []
+    search_response = await kernel.invoke(kmPlugin["search"], query=prompt)
+    search_json = json.loads(search_response.value)
+    for result in search_json["results"]:
+        search_results.append(result)
     
-    resp = await kernel.invoke(chatPlugin["chat"], chat_history=history, )
+    history.add_user_message(prompt)
+    #json.dumps(search_results)
+    resp = await kernel.invoke(chatPlugin["chat"], chat_history=history, input_text=search_results)
     
     if resp:
         # return resp as json
