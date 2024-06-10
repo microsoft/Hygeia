@@ -48,6 +48,38 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     else:
         return func.HttpResponse("Response: No response")
 
-    
 
+@http_func.route(route='documents', auth_level='anonymous', methods=['DELETE'])
+async def http_deleteDocuments(req: func.HttpRequest) -> func.HttpResponse:
     
+    url_params = req.route_params
+
+    document_id = url_params.get('documentId')
+    
+    if not document_id:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            raise RuntimeError("documentId data must be set in url query.")
+        else:
+            document_id = req_body.get('documentId')
+            if not document_id:
+                raise RuntimeError("documentId data must be set in url query.")
+
+    # Get managed identity token and env vars
+    #creds = DefaultAzureCredential()
+    # deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+    # embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
+    # endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+    
+    kernel = Kernel()
+
+    kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
+    
+    resp = await kernel.invoke(kmPlugin["deleteDocuments"], document_id=document_id)    
+    
+    if resp:
+        # return resp as json
+        return func.HttpResponse(str(resp), mimetype="application/json")
+    else:
+        return func.HttpResponse("Response: No response", status_code=resp.status_code)

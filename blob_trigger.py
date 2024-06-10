@@ -29,7 +29,6 @@ async def blob_upload(client: blob.BlobClient):
     
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
 
-    # Add logic to download blob to stream here <- PHIL TODO GET IT DONE
     stream = io.BytesIO()
     num_bytes = client.download_blob().readinto(stream)
     logging.info(f"Blob size in bytes: {num_bytes}")
@@ -40,13 +39,3 @@ async def blob_upload(client: blob.BlobClient):
         logging.info(f"Response: {response}")
     else:
         logging.info("Response: No response")
-
-
-
-    # 1. Get the blob
-    # 2. create instance of our custom kernelmemoryplugin <- PHIL TODO GET IT DONE
-    # 3. call the kernelmemoryplugin to store the blob
-    
-    #kernel = Kernel()
-    #kernelmemfunc = kernel.import_plugin(KernelMemroyPlugin)
-    #kernel.invoke(kernelmemfunc, "store_blob", name)
