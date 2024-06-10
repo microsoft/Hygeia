@@ -1,8 +1,8 @@
-# @appUrl = https://km-ca-kernelmemory-svc.mangoground-3bb94c6a.eastus.azurecontainerapps.io
-@appUrl = http://localhost:7071/api
+@azfuncurl = http://localhost:7071
+@kmserviceurl = http://localhost:9001
 
 # Executes a request to the default http trigger of Azure function (includes orchestration logic)
-POST http://localhost:7071/api/ask HTTP/1.1
+POST {{azfuncurl}}/api/ask HTTP/1.1
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ Accept: application/json
 
 ###
 # Execute a sample 'ask' to the Kernel Memory service
-POST http://localhost:7071/api/ask HTTP/1.1
+POST {{kmserviceurl}}/ask HTTP/1.1
 content-type: application/json
 {
     "index": "default",
@@ -29,7 +29,7 @@ content-type: application/json
 
 ###
 # Executes a sample 'search' to the Kernel Memory service
-POST http://localhost:7071/api/search HTTP/1.1
+POST {{kmserviceurl}}/search HTTP/1.1
 content-type: application/json
 
 {
@@ -41,12 +41,7 @@ content-type: application/json
 
 ###
 # Uploads a file directly to the Kernel Memory service
-# POST {{appUrl}}/upload HTTP/1.1
-# content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
-
-POST http://localhost:7071/api/upload HTTP/1.1
-Host: km-ca-kernelmemory-svc.mangoground-3bb94c6a.eastus.azurecontainerapps.io
-Content-Length: 458
+POST {{kmserviceurl}}/upload HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -64,3 +59,13 @@ Content-Disposition: form-data; name="documentId"
 
 PowerPlatDoc
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+# Delete a document from the Kernel Memory service
+POST {{kmserviceurl}}/delete HTTP/1.1
+content-type: application/json
+
+{
+    "index": "default",
+    "documentId": "SKTEST"
+}

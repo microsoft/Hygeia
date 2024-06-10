@@ -33,7 +33,7 @@ class KernelMemoryPlugin:
         query: Annotated[str, "the search query"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the search query response."""
-        response = requests.post(f"{self.base_url}search", json={"query": query, "index": self.index})
+        response = requests.post(f"{self.base_url}search", json={"query": query, "index": self.index, "limit": 5, "minRelevance": 0.5})
         return response.text
     
     @kernel_function(
