@@ -1,9 +1,7 @@
-import io
 from typing import Annotated
 import logging
 import os
 import requests
-import azure.functions as func
 
 from semantic_kernel.functions import kernel_function
 
@@ -59,7 +57,6 @@ class KernelMemoryPlugin:
     def delete(
         self,        
         document_id: Annotated[str, "the document id"],
-        # file_name: Annotated[str, "the file name"],
     ) -> Annotated[str, "the output is a string"]:
         """Returns the file delete response."""
         logging.info(f"Index name: {self.index}")
