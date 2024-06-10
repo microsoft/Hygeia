@@ -7,7 +7,6 @@ from semantic_kernel.connectors.ai.open_ai.services.azure_text_embedding import 
 from semantic_kernel.contents import ChatHistory
 from semantic_kernel.kernel import Kernel
 from semantic_kernel.memory import SemanticTextMemory, VolatileMemoryStore
-from semantic_kernel.core_plugins.text_memory_plugin import TextMemoryPlugin
 from azure.identity import DefaultAzureCredential
 
 import azure.functions as func 
@@ -38,6 +37,8 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     )
     
     memory = SemanticTextMemory(storage=VolatileMemoryStore(), embeddings_generator=embedding_gen)
+    
+    memory.save_information(collection="chat", id=session_id, text=session_id)
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
     chatPlugin = kernel.add_plugin(parent_directory=plugins_directory, plugin_name="prompts")    
@@ -45,8 +46,8 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     history = ChatHistory()
     # fetch short term memories for sessionId (chat history)
     if session_id:
-        result = memory.get(collection="chat", key=session_id)
-        if result:
+        result = await memory.get(collection="chat", key=session_id)
+        if result and result.text:
             history = json.loads(result.text)    
     
     # fetch memories related to user prompt (RAG docs)
@@ -60,6 +61,8 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     resp = await kernel.invoke(chatPlugin["chat"], chat_history=history, input_text=search_results)
     
     if resp:
+        # store chat history in memory
+        await memory.save_information(collection="chat", key=session_id, value=json.dumps(history.to_dict()))
         # return resp as json
         return func.HttpResponse(str(resp), mimetype="application/json")
     else:
@@ -110,7 +113,6 @@ def try_get_param(name: str, req: func.HttpRequest, required: bool = False) -> s
                 raise RuntimeError(f"{name} data must be set in POST.")
         else: 
             result = req_body.get(name) 
-            if not result:
-                if required:
-                    raise RuntimeError(f"{name} data must be set in POST.")
+            if not result and required:
+                raise RuntimeError(f"{name} data must be set in POST.")
     return result
