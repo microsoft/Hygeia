@@ -67,14 +67,12 @@ async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
         if result:
             history = json.loads(result.text)
     
-    if history.messages.count() == 0:
-        history.add_system_message()
+    history
     
-    # fetch memories related to user prompt
-    resp = await kernel.invoke(kmPlugin["search"], question=prompt)
+    # fetch memories related to user prompt (RAG docs)
+    search_results = await kernel.invoke(kmPlugin["search"], question=prompt)
     
-    
-    
+    resp = await kernel.invoke(chatPlugin["chat"], chat_history=history, )
     
     if resp:
         # return resp as json
@@ -83,9 +81,7 @@ async def http_ask(req: func.HttpRequest, session_id: str) -> func.HttpResponse:
         return func.HttpResponse("Response: No response")
 
 
-def get_azure_openai_token() -> str:
-    creds = DefaultAzureCredential()
-    return creds.get_token("https://cognitiveservices.azure.com", tenant_id=os.getenv("AZUREAD_TENANT_ID")).token@http_func.route(route='documents', auth_level='anonymous', methods=['DELETE'])
+@http_func.route(route='documents', auth_level='anonymous', methods=['DELETE'])
 async def http_deleteDocuments(req: func.HttpRequest) -> func.HttpResponse:
     
     url_params = req.route_params
@@ -100,13 +96,7 @@ async def http_deleteDocuments(req: func.HttpRequest) -> func.HttpResponse:
         else:
             document_id = req_body.get('documentId')
             if not document_id:
-                raise RuntimeError("documentId data must be set in url query.")
-
-    # Get managed identity token and env vars
-    #creds = DefaultAzureCredential()
-    # deployment = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-    # embedding_deployment = os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT")
-    # endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
+                raise RuntimeError("documentId data must be set in url query.")    
     
     kernel = Kernel()
 
@@ -119,3 +109,8 @@ async def http_deleteDocuments(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(str(resp), mimetype="application/json")
     else:
         return func.HttpResponse("Response: No response", status_code=resp.status_code)
+
+
+def get_azure_openai_token() -> str:
+    creds = DefaultAzureCredential()
+    return creds.get_token("https://cognitiveservices.azure.com", tenant_id=os.getenv("AZUREAD_TENANT_ID")).token@http_func.route(route='documents', auth_level='anonymous', methods=['DELETE'])
