@@ -51,3 +51,19 @@ class KernelMemoryPlugin:
 
         response = requests.post(f"{self.base_url}upload", files={ file_name: file }, data={"index": self.index, "documentId": document_id})
         return response.text
+
+    @kernel_function(
+        name="deleteDocuments",
+        description="Delete a document from the memory.",
+    )
+    def delete(
+        self,        
+        document_id: Annotated[str, "the document id"],
+        # file_name: Annotated[str, "the file name"],
+    ) -> Annotated[str, "the output is a string"]:
+        """Returns the file delete response."""
+        logging.info(f"Index name: {self.index}")
+
+        response = requests.delete(f"{self.base_url}documents?index={self.index}&documentId={document_id}")
+
+        return response.text

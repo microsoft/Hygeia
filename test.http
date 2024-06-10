@@ -1,26 +1,35 @@
+# @appUrl = https://km-ca-kernelmemory-svc.mangoground-3bb94c6a.eastus.azurecontainerapps.io
+@appUrl = http://localhost:7071/api
+
 # Executes a request to the default http trigger of Azure function (includes orchestration logic)
 POST http://localhost:7071/api/ask HTTP/1.1
 content-type: application/json
 
 {
-    "prompt": "When should i use the media release form?"
+    "prompt": "Can I use the Icons for commercial products??"
+}
+###
+DELETE http://localhost:7071/api/documents HTTP/1.1
+Accept: application/json
+
+{
+    "index": "default",
+    "documentId": "PowerPlatDoc"
 }
 
 ###
 # Execute a sample 'ask' to the Kernel Memory service
-POST http://localhost:9001/ask HTTP/1.1
+POST http://localhost:7071/api/ask HTTP/1.1
 content-type: application/json
-
 {
     "index": "default",
-    "question": "Are there one or more talking points about OpenAI?",
-    "minRelevance": 0.75
+    "question": "Can I use the Icons for commercial products?"
 
 }
 
 ###
 # Executes a sample 'search' to the Kernel Memory service
-POST http://localhost:9001/search HTTP/1.1
+POST http://localhost:7071/api/search HTTP/1.1
 content-type: application/json
 
 {
@@ -32,9 +41,20 @@ content-type: application/json
 
 ###
 # Uploads a file directly to the Kernel Memory service
-POST http://localhost:9001/upload HTTP/1.1
+# POST {{appUrl}}/upload HTTP/1.1
+# content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+POST http://localhost:7071/api/upload HTTP/1.1
+Host: km-ca-kernelmemory-svc.mangoground-3bb94c6a.eastus.azurecontainerapps.io
+Content-Length: 458
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file1"; filename="CELA_Licenses_Public_Use_Icons.pdf"
+
+Content-Type: application/pdf
+
+(data)
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="index"
 
@@ -42,10 +62,5 @@ default
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="documentId"
 
-SKTEST
-------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file1"; filename="/C:/Users/phjirsa/Dev/kernel-memory/examples/006-curl-calling-webservice/test.pdf"
-Content-Type: application/pdf
-
-(data)
+PowerPlatDoc
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
