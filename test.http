@@ -7,7 +7,16 @@ content-type: application/json
 
 {
     "prompt": "How do I setup an RRU?",
-    "sessionId": "1"
+    "sessionId": "4"
+}
+
+###
+POST {{azfuncurl}}/api/ask HTTP/1.1
+content-type: application/json
+
+{
+    "prompt": "Which step talked about necessary tools and equipment?",
+    "sessionId": "4"
 }
 ###
 DELETE http://localhost:7071/api/documents HTTP/1.1

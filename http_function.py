@@ -75,9 +75,12 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
             history.add_assistant_message(value.content)
         # store chat history in memory
         await memory.save_information(collection=collection, id=session_id, text=history.model_dump_json())
+        
+        await cleanup(acs_store)
         # return resp as json
         return func.HttpResponse(str(resp), mimetype="application/json")
     else:
+        await cleanup(acs_store)
         return func.HttpResponse("Response: No response")
 
 
@@ -128,3 +131,7 @@ def try_get_param(name: str, req: func.HttpRequest, required: bool = False) -> s
             if not result and required:
                 raise RuntimeError(f"{name} data must be set in POST.")
     return result
+
+async def cleanup(object):
+    if object is not None:
+        await object.close()
