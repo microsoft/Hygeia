@@ -19,7 +19,9 @@ content-type: application/json
     "sessionId": "6"
 }
 ###
-DELETE http://localhost:7071/api/documents HTTP/1.1
+
+#Delete a document from the Kernel Memory service using the Azure function
+DELETE {{azfuncurl}}/api/documents HTTP/1.1
 Accept: application/json
 
 {

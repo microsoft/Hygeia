@@ -1,5 +1,5 @@
 import logging 
-
+from typing import Optional
 import os
 import json
 from semantic_kernel.connectors.ai.open_ai.services.azure_chat_completion import AzureChatCompletion
@@ -23,8 +23,10 @@ collection = "chat-history"
 @http_func.route(route='ask', auth_level='anonymous', methods=['POST'])
 async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("Python HTTP trigger function processed a request.")
+    
     prompt = try_get_param('prompt', req, required=True)
     session_id = try_get_param('sessionId', req)
+    indexName = try_get_param('index', req)
     
     plugins_directory = os.path.join(os.path.dirname(__file__), "plugins")
     
@@ -45,14 +47,14 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     #search_creds = AISearchCredentials(tenant_id=os.getenv("AZUREAD_TENANT_ID"))
     search_endpoint = os.getenv("AZUREAI_SEARCH_ENDPOINT")
     
-    acs_store = AzureCognitiveSearchMemoryStore(vector_size=1536, admin_key=search_key, search_endpoint=search_endpoint)
+    acs_store = AzureCognitiveSearchMemoryStore(vector_size = 1536, admin_key=search_key, search_endpoint=search_endpoint)
     if not await acs_store.does_collection_exist(collection):
         await acs_store.create_collection(collection)
     
     memory = SemanticTextMemory(storage=acs_store, embeddings_generator=embedding_gen)
     
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
-    chatPlugin = kernel.add_plugin(parent_directory=plugins_directory, plugin_name="prompts")    
+    chatPlugin = kernel.add_plugin(parent_directory = plugins_directory, plugin_name = "prompts")    
     
     history = ChatHistory()
     # fetch short term memories for sessionId (chat history)
@@ -63,10 +65,14 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
                 history = history.model_validate_json(result.text)
         except Exception:
             pass
+
     # fetch memories related to user prompt (RAG docs)
     search_results = []
-    search_response = await kernel.invoke(kmPlugin["search"], query=prompt)
+    
+    search_response = await kernel.invoke(kmPlugin["search"], query = prompt, indexName = indexName)
+
     search_json = json.loads(search_response.value)
+    
     for result in search_json["results"]:
         search_results.append(result)
     
@@ -93,26 +99,15 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
 
 @http_func.route(route='documents', auth_level='anonymous', methods=['DELETE'])
 async def http_deleteDocuments(req: func.HttpRequest) -> func.HttpResponse:
-    
-    url_params = req.route_params
+     
+    documentId = try_get_param('documentId', req, required=True)
+    indexName = try_get_param('index', req)
 
-    document_id = url_params.get('documentId')
-    
-    if not document_id:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            raise RuntimeError("documentId data must be set in url query.")
-        else:
-            document_id = req_body.get('documentId')
-            if not document_id:
-                raise RuntimeError("documentId data must be set in url query.")    
-    
     kernel = Kernel()
 
     kmPlugin = kernel.add_plugin(KernelMemoryPlugin(), "KernelMemoryPlugin")
     
-    resp = await kernel.invoke(kmPlugin["deleteDocuments"], document_id=document_id)
+    resp = await kernel.invoke(kmPlugin["deleteDocuments"], document_id = documentId, index_name = indexName)
     
     if resp:
         # return resp as json
@@ -125,7 +120,7 @@ def get_azure_openai_token() -> str:
     creds = DefaultAzureCredential()
     return creds.get_token("https://cognitiveservices.azure.com", tenant_id=os.getenv("AZUREAD_TENANT_ID")).token
 
-def try_get_param(name: str, req: func.HttpRequest, required: bool = False) -> str:
+def try_get_param(name: str, req: func.HttpRequest, required: bool = False) -> Optional[str]:
     result = req.params.get(name) 
     if not result: 
         try: 
@@ -137,6 +132,7 @@ def try_get_param(name: str, req: func.HttpRequest, required: bool = False) -> s
             result = req_body.get(name) 
             if not result and required:
                 raise RuntimeError(f"{name} data must be set in POST.")
+    
     return result
 
 async def cleanup(object):
