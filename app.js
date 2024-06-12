@@ -9,7 +9,7 @@ async function askQuestion() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ prompt: question }) // Send the question as "prompt"
+            body: JSON.stringify({ prompt: question, sessionId: sessionId }) // Send the question as "prompt"
         });
 
         if (response.ok) {
