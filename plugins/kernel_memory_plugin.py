@@ -16,10 +16,16 @@ class KernelMemoryPlugin:
     def ask(
         self,
         question: Annotated[str, "the question to ask"],
+        index_name: Annotated[str, "the index name. Default = settings.json value"] = None
     ) -> Annotated[str, "the output is a string"]:
         """Returns the response from Kernel Memory service ask"""
+
+        if index_name is not None and index_name != "None":
+            self.index = index_name
+
         # call the http endpoint to ask the question
         response = requests.post(f"{self.base_url}ask", json={"question": question, "index": self.index, "minRelevance": 0.5, "limit": 1})
+        
         return response.text        
 
     @kernel_function(
@@ -57,8 +63,13 @@ class KernelMemoryPlugin:
     def delete(
         self,        
         document_id: Annotated[str, "the document id"],
+        index_name: Annotated[str, "the index name. Default = settings.json value"] = None
     ) -> Annotated[str, "the output is a string"]:
         """Returns the file delete response."""
+        
+        if index_name is not None and index_name != "None":
+            self.index = index_name            
+
         logging.info(f"Index name: {self.index}")
 
         response = requests.delete(f"{self.base_url}documents?index={self.index}&documentId={document_id}")
