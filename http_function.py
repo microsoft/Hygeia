@@ -81,7 +81,11 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
         
         await cleanup(acs_store)
         # return resp as json
-        return func.HttpResponse(str(resp), mimetype="application/json")
+        # create json object with response
+        response_json = {
+            "text": str(resp)
+        }
+        return func.HttpResponse(json.dumps(response_json), mimetype="application/json")
     else:
         await cleanup(acs_store)
         return func.HttpResponse("Response: No response")
