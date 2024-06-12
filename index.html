@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2a004d; /* Darker purple background */
+            color: #d1b3ff; /* Lighter shade of purple text */
+            margin: 0;
+            padding: 0;
+        }
+        #chat-container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #3b0066; /* Slightly different shade of purple for contrast */
+            color: #d1b3ff;
+            max-height: 300px; /* Maximum height for the response area */
+            overflow-y: auto; /* Enable vertical scrolling */
+            width: calc(100% - 40px); /* Full width minus padding */
+            border: 1px solid #ddd;
+        }
+        #question {
+            width: calc(100% - 100px); /* Full width minus button width and some padding */
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            background-color: #3b0066;
+            color: #d1b3ff;
+            border-radius: 5px; /* Rounded edges */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #8000ff; /* Complementary purple shade for the button */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px; /* Rounded edges */
+        }
+        button:hover {
+            background-color: #b366ff; /* Lighter shade on hover */
+        }
+        h1, h2 {
+            color: #d1b3ff;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div>
+            <h1>AI Monitor</h1>
+            <h2>Hi! I am AMIGO, your partner in crime.</h2>
+            <h2>What would you like to know?</h2>
+        </div>
+        <div>
+            <input type="text" id="question" placeholder="Type your question here" autocomplete="off" />
+            <button onclick="askQuestion()">Ask</button>
+            <div id="response"></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
