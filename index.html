@@ -36,6 +36,15 @@
             color: #d1b3ff;
             border-radius: 5px; /* Rounded edges */
         }
+        #sessionId {
+            width: calc(100% - 100px); /* Full width minus button width and some padding */
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            background-color: #3b0066;
+            color: #d1b3ff;
+            border-radius: 5px; /* Rounded edges */
+        }
         button {
             padding: 10px 20px;
             background-color: #8000ff; /* Complementary purple shade for the button */
@@ -61,6 +70,7 @@
             <h2>What would you like to know?</h2>
         </div>
         <div>
+            <input type="text" id="sessionId" placeholder="Chat session id (optional)" autocomplete="off" />
             <input type="text" id="question" placeholder="Type your question here" autocomplete="off" />
             <button onclick="askQuestion()">Ask</button>
             <div id="response"></div>
