@@ -14,6 +14,8 @@ import azure.functions as func
 
 from plugins.kernel_memory_plugin import KernelMemoryPlugin
 
+#from credentials import AISearchCredentials
+
 http_func = func.Blueprint() 
 
 collection = "chat-history"
@@ -40,6 +42,7 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
     )
     
     search_key = os.getenv("AZUREAI_SEARCH_ADMIN_KEY")
+    #search_creds = AISearchCredentials(tenant_id=os.getenv("AZUREAD_TENANT_ID"))
     search_endpoint = os.getenv("AZUREAI_SEARCH_ENDPOINT")
     
     acs_store = AzureCognitiveSearchMemoryStore(vector_size=1536, admin_key=search_key, search_endpoint=search_endpoint)
@@ -78,7 +81,11 @@ async def http_ask(req: func.HttpRequest) -> func.HttpResponse:
         
         await cleanup(acs_store)
         # return resp as json
-        return func.HttpResponse(str(resp), mimetype="application/json")
+        # create json object with response
+        response_json = {
+            "text": str(resp)
+        }
+        return func.HttpResponse(json.dumps(response_json), mimetype="application/json")
     else:
         await cleanup(acs_store)
         return func.HttpResponse("Response: No response")

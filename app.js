@@ -1,5 +1,6 @@
 async function askQuestion() {
     const question = document.getElementById('question').value;
+    const sessionId = document.getElementById('sessionId').value;
     const responseDiv = document.getElementById('response');
     const appUrl = 'http://localhost:7071/api/ask'; // Update with your Azure Function URL
 
