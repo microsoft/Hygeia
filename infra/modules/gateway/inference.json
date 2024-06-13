@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://{endpoint}/openai",
+      "url": "https://openai",
       "variables": {
         "endpoint": {
           "default": "your-resource-name.openai.azure.com"

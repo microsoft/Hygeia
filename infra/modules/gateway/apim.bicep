@@ -1,5 +1,9 @@
+
 param name string
 param location string = resourceGroup().location
+param aoaiPrimaryAccount string
+param aoaiSecondaryAccount string
+param managedIdentityPrincipalName string = ''
 param tags object = {}
 
 @description('The email address of the owner of the service')
@@ -26,6 +30,19 @@ param skuCount int = 0
 @description('Azure Application Insights Name')
 param applicationInsightsName string
 
+resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-31-preview' existing = if (!empty(managedIdentityPrincipalName)) {
+  name: managedIdentityPrincipalName
+}
+
+var apimIdentity = (empty(managedIdentityPrincipalName)) ? {
+  type: 'SystemAssigned'
+} : {
+  type: 'UserAssigned'
+  userAssignedIdentities: {
+    '${userAssignedIdentity.id}': {}
+  }
+}
+
 resource apimService 'Microsoft.ApiManagement/service@2021-08-01' = {
   name: name
   location: location
@@ -34,9 +51,7 @@ resource apimService 'Microsoft.ApiManagement/service@2021-08-01' = {
     name: sku
     capacity: (sku == 'Consumption') ? 0 : ((sku == 'Developer') ? 1 : skuCount)
   }
-  identity: {
-    type: 'SystemAssigned'
-  }
+  identity: apimIdentity
   properties: {
     publisherEmail: publisherEmail
     publisherName: publisherName
@@ -89,6 +104,26 @@ resource apimLogger 'Microsoft.ApiManagement/service/loggers@2021-12-01-preview'
 
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing = if (!empty(applicationInsightsName)) {
   name: applicationInsightsName
+}
+
+resource primarybackend 'Microsoft.ApiManagement/service/backends@2023-03-01-preview' = {
+  name: 'primary'
+  parent: apimService
+  properties: {
+    description: 'Primary LLM deployment endpoint'
+    protocol: 'http'
+    url: 'https://${aoaiPrimaryAccount}.openai.azure.com/openai'
+  }
+}
+
+resource secondarybackend 'Microsoft.ApiManagement/service/backends@2023-03-01-preview' = {
+  name: 'secondary'
+  parent: apimService
+  properties: {
+    description: 'Secondary LLM deployment endpoint'
+    protocol: 'http'
+    url: 'https://${aoaiSecondaryAccount}.openai.azure.com/openai'
+  }
 }
 
 output apimServiceName string = apimService.name

@@ -2,7 +2,7 @@
     <inbound>
         <base />
         <set-backend-service backend-id="primary" />
-        <authentication-managed-identity resource="https://cognitiveservices.azure.com" client-id="{clientId}" ignore-error="false" />        
+        <authentication-managed-identity resource="https://cognitiveservices.azure.com" {clientId} ignore-error="false" />        
     </inbound>
     <backend>
         <retry condition="@(context.Response.StatusCode == 429 || context.Response.StatusCode >= 500)" count="5" interval="1" delta="1" max-interval="8" first-fast-retry="false">
