@@ -11,7 +11,7 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2022-08-01' exist
   name: apiManagementServiceName
 }
 
-var managedIdentityClientId = (!empty(userAssignedIdentity)) ? userAssignedIdentity.properties.clientId : ''
+var managedIdentityClientId = (!empty(managedIdentityPrincipalName)) ? userAssignedIdentity.properties.clientId : ''
 
 resource api 'Microsoft.ApiManagement/service/apis@2023-03-01-preview' = {
   name: apiName

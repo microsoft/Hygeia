@@ -7,13 +7,14 @@ param location string = resourceGroup().location
 param prefix string = 'hygeia${uniqueString(resourceGroup().id)}'
 param aoaiPrimaryAccount string = 'km-openai-e8a8fe'
 param aoaiSecondaryAccount string = 'km-openai-e8a8fe'
+param applicationInsightsName string = '${prefix}-ai'
 param tags object = {}
 
 module apim 'modules/gateway/apim.bicep' = {
   name: 'apim'
   params: {
     tags: tags
-    applicationInsightsName: 'appInsightsName'
+    applicationInsightsName: applicationInsightsName
     name: '${prefix}-apim'
     location: location
     sku: 'Consumption'
