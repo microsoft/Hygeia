@@ -8,3 +8,4 @@ azurefunctions-extensions-bindings-blob
 openai
 semantic-kernel==1.0.5
 azure-identity==1.16.1
+azure-search-documents
