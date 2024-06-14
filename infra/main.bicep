@@ -9,15 +9,17 @@ param aoaiPrimaryAccount string = 'km-openai-e8a8fe'
 param aoaiSecondaryAccount string = 'km-openai-e8a8fe'
 param applicationInsightsName string = '${prefix}-ai'
 param tags object = {}
+param apimName string = '${prefix}-apim'
+param sku string = 'Consumption'
 
 module apim 'modules/gateway/apim.bicep' = {
   name: 'apim'
   params: {
     tags: tags
     applicationInsightsName: applicationInsightsName
-    name: '${prefix}-apim'
+    name: apimName
     location: location
-    sku: 'Consumption'
+    sku: sku
     aoaiPrimaryAccount: aoaiPrimaryAccount
     aoaiSecondaryAccount: aoaiSecondaryAccount
   }
