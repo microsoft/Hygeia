@@ -9,11 +9,6 @@ import azurefunctions.extensions.bindings.blob as blob
 
 blob_func = func.Blueprint() 
 
-# credentials = DefaultAzureCredential()
-
-# @blob_func.function_nam(name="BlobTrigger")
-#@blob_func.blob_trigger(arg_name="blobFile", path="upload/{id}", connection="STORAGE_CONNECTION_STRING")
-#async def blob_upload(blobFile: func.InputStream):
 @blob_func.blob_trigger(
     arg_name="client", path="upload/{id}", connection="STORAGE_CONNECTION_STRING"
 )
