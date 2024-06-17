@@ -60,6 +60,10 @@ This project requires the following to be installed on your development environm
 Use the following for a `local.settings.json` file, or to build Environment Variables for your deployed Azure Function:
 
 ```JSON
+
+## Local Configuration
+To run the function app locally, create a local.settings.json file with the following example and update with your own values:
+``` json
 {
     "IsEncrypted": false,
     "Host": {
@@ -75,6 +79,7 @@ Use the following for a `local.settings.json` file, or to build Environment Vari
       "KERNEL_MEMORY_SERVICE_ENDPOINT": "",
       "KERNEL_MEMORY_SERVICE_INDEX": "default",
       "STORAGE_CONNECTION_STRING": "",
+      "AZUREAD_TENANT_ID": "",
       "AZUREAI_SEARCH_ADMIN_KEY": "",
       "AZUREAI_SEARCH_ENDPOINT": ""
     }
