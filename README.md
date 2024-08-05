@@ -18,7 +18,7 @@ This project repository includes the following components:
 
 | Component | Description |
 |---|---|
-| [function_app.py](./function_app.py) | Defines the Azure Function and components |
+| [function_app.py](./function_app.py) | Defines the Azure Function and components (includes `http_function.py` and `blob_trigger.py`)|
 | [http_function.py](./http_function.py) | A function defining an `/ask` API route, and orchestration logic behind it to perform a RAG pattern generative answer to a request |
 | [blob_trigger.py](./blob_trigger.py) | A function triggered by blobs added to an `upload` container, which processes the blob into AI Search through the Kernel Memory pipeline |
 | [Kernel Memory Plugin](./plugins/kernel_memory_plugin.py) | Plugin registered with the Semantic Kernel orchestration layer to interface with the Kernel Memory service `/ask`, `/search`, `/upload` and `/delete` endpoints. |
@@ -89,7 +89,7 @@ To run the function app locally, create a local.settings.json file with the foll
 |---|---|
 | AZURE_OPENAI_CHAT_DEPLOYMENT_NAME | The name of your Azure OpenAI chat model deployment |
 | AZURE_OPENAI_EMBEDDING_DEPLOYMENT_NAME | The name of your Azure OpenAI embeddings model deployment |
-| AZURE_OPENAI_ENDPOINT | Endpoint URL of your Azure OpenAI resource |
+| AZURE_OPENAI_ENDPOINT | Endpoint URL of your Azure OpenAI resource, or your APIM gateway for Azure OpenAI |
 | KERNEL_MEMORY_SERVICE_ENDPOINT | Endpoint URL of the Kernel Memory service container app |
 | KERNEL_MEMORY_SERVICE_INDEX | The name of the index used for upload and search of documents. |
 | STORAGE_CONNECTION_STRING | For the storage account used for uploading documents via the `blob_trigger` function. We recommend using the storage account deployed with the Kernel Memory service |
@@ -97,10 +97,20 @@ To run the function app locally, create a local.settings.json file with the foll
 | AZUREAI_SEARCH_ENDPOINT | Endpoing URL of the Search Service deployed with the Kernel Memory service, used for the Chat History |
 
 ## Deploy to Azure
-UNDER DEVELOPMENT
 
-az login
-func azure functionapp publish [FUNCTION-APP-NAME]
+### API Management Gateway
+Bicep templates are provided to deploy and configure API Management as a gateway to manage scaling and resiliency of calls into your Azure OpenAI model deployments. See [APIM Infra Instructions](./infra/README.md) for deploying APIM to your Azure subscription.
+
+### Function Deployment
+To deploy the code to an Function App in your Azure subscription from VSCode:
+
+1. Install the [Azure Resources](https://github.com/microsoft/vscode-azureresourcegroups) and [Azure Functions](https://github.com/microsoft/vscode-azurefunctions) VSCode extensions if not already.
+2. In the `Azure ` panel of VSCode, sign into your Azure subscription
+3. In the `WORKSPACE` tree, click the Azure Function icon at the top and select `Deploy to Azure` 
+4. In the command pallet workflow, select an existing function or create new, using `Python 3.11`
+5. Once deployment is complete, in the `Resources` tree, browse into your subscription and the `Function App` node to find your new function. 
+6. Expand the function, right-click on `Application Settings`, and select `Upload Local Settings`
+  > NOTE: Ensure your `local.settings.json` file is properly created and configured as defined above first
 
 ## Contributing
 
